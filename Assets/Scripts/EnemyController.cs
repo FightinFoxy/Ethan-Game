@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float movespeed = 1.5f;
     [SerializeField] private float attackDamage = 1.0f;
     [SerializeField] private float attackRate = 1f;
-    [SerializeField] private float detectionRange = 0.6;
+    [SerializeField] private float detectionRange = 0.6f;
 
     // States
     private enum enemyState { Walking, Attacking, Dead }
@@ -62,14 +62,15 @@ public class EnemyController : MonoBehaviour
         if (targetTower == null)
         {
             currentState = enemyState.Walking;
-            Debug.log ("Target Tower dead, switching to walking");
+            Debug.Log ("Target Tower dead, switching to walking");
+            return;
         }
 
-        attackDamageTimer += Time.deltaTime;
+        attackTimer += Time.deltaTime;
         if (attackTimer >=1f / attackRate)
         {
             targetTower.TakeDamage(attackDamage);
-            attaclTimer=0f;
+            attackTimer=0f;
         }
     }
 
