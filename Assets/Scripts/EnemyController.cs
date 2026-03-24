@@ -48,6 +48,12 @@ public class EnemyController : MonoBehaviour
            TowerHealth tower = hit.GetComponent<TowerHealth>();
            if (tower != null)
             {
+                // Only attack towers that are in the same lane
+                float zDifference = Mathf.Abs(hit.transform.position.z - transform.position.z);
+                if (zDifference > 0.6f)
+                    continue;   //Skip this tower, different lane
+
+                    
                 // Found Tower Switch to attack mode
                 targetTower = tower;
                 currentState = enemyState.Attacking;

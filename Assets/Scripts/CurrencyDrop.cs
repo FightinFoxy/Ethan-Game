@@ -11,8 +11,13 @@ public class CurrencyDrop : MonoBehaviour
 
     void Update()
     {
-        // Fall down
-        transform.Translate(Vector3.down * fallSpeed * Time.deltaTime);
+        // Fall down until surface
+        if(transform.position.y > 0.4f)
+        {
+            transform.Translate(Vector3.down * fallSpeed * Time.deltaTime);
+        }
+
+        
 
         // Destory if uncollected in time
         lifetimeTimer += Time.deltaTime;
@@ -32,6 +37,11 @@ public class CurrencyDrop : MonoBehaviour
             Debug.Log("Collected " + currencyValue + "currency!");
             Destroy(gameObject);
         }
+    }
+
+    public void SetFallSpeed(float speed)
+    {
+        fallSpeed = speed;
     }
 
 

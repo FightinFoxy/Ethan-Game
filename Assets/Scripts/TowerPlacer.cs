@@ -5,8 +5,6 @@ public class TowerPlacer : MonoBehaviour
 {
 
     //Declarations
-    [SerializeField] private GameObject towerPrefab; 
-    [SerializeField] private int towerCost = 100;
     [SerializeField] private TextMeshProUGUI feedbackText;
     [SerializeField] private float feedbackDuration = 2f;
     private Camera mainCamera;
@@ -51,21 +49,31 @@ public class TowerPlacer : MonoBehaviour
                 {
                     return;
                 }
+
+                // Read Currently Selected Tower
+                TowerData selectedTower = TowerSelector.Instance.SelectedTower;
+
+                if(selectedTower == null)
+                {
+                    ShowFeedback("No tower selected!");
+                    return;
+                }
+
                 Vector2Int gridPos = gridManager.WorldToGrid(hit.point);
                 int col = gridPos.x;
                 int row = gridPos.y;
 
                 if(gridManager.IsPlaceable(col, row))
                 {
-                    if (CurrencyManager.Instance.TrySpendCurrency(towerCost))
+                    if (CurrencyManager.Instance.TrySpendCurrency(selectedTower.cost))
                     {
                     Vector3 spawnPos = gridManager.GridToWorld(col, row);
-                    Instantiate(towerPrefab, spawnPos, Quaternion.identity);
+                    Instantiate(selectedTower.prefab, spawnPos, Quaternion.identity);
                     gridManager.OccupyCell(col, row);
                     }
                     else
                     {
-                        ShowFeedback("Not enough currency!");
+                        ShowFeedback("Not enough currency! Need " + selectedTower.cost);
                     }
 
                 }

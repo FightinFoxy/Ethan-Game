@@ -1,2 +1,12 @@
 fileFormatVersion: 2
 guid: 0c8523aeb1d37e0409930cbe023ed8e6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - currencyDropPrefab: {fileID: 7823378863336637162, guid: 0f30c77894bd06543b5de617724c5c0b, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
