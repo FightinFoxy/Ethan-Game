@@ -1,16 +1,20 @@
 using UnityEngine;
+using System;
 
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 100f;
     private float currentHealth;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public event Action OnDeath;
+    
     void Start()
     {
         currentHealth = maxHealth;
         
     }
-    
+
+
+
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
@@ -24,6 +28,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
+        OnDeath?.Invoke();
         EnemyController controller = GetComponent<EnemyController>();
         if (controller != null)
             controller.Die();
@@ -31,9 +36,9 @@ public class EnemyHealth : MonoBehaviour
             Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public void Initialise(float health)
+{
+    maxHealth = health;
+    currentHealth = health;
+}
 }

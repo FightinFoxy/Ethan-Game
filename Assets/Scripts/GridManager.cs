@@ -62,6 +62,14 @@ public class GridManager : MonoBehaviour
         Debug.Log("Occupied cell - Col: " + col + "Row " + row);
     }
 
+    public void FreeCell(Vector3 worldPosition)
+    {
+        int col = Mathf.FloorToInt(worldPosition.x);
+        int row = Mathf.FloorToInt(worldPosition.z);
+        if (col >= 0 && row >= 0 && row < rows)
+            grid[col, row] = false;
+    }
+
     
     
 

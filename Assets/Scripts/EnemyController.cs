@@ -2,13 +2,10 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    //Other states and values cna be implemented in order to have a wider vairety of enemy types
+   
 
     // Base values can be edited in Unity Editor
-    [SerializeField] private float movespeed = 1.5f;
-    [SerializeField] private float attackDamage = 1.0f;
-    [SerializeField] private float attackRate = 1f;
-    [SerializeField] private float detectionRange = 0.6f;
+    [SerializeField] private EnemyData enemyData;
 
     // States
     private enum enemyState { Walking, Attacking, Dead }
@@ -40,10 +37,22 @@ public class EnemyController : MonoBehaviour
     private void Walk()
     {
         // Move in negative X direction, right to left
-        transform.Translate(Vector3.left * movespeed * Time.deltaTime);
+        transform.Translate(Vector3.left * enemyData.moveSpeed * Time.deltaTime);
+
+        if (transform.position.x < -0.5f)
+        {
+            GameManager.Instance.TriggerGameOver();
+
+            WaveManager waveManager = FindFirstObjectByType<WaveManager>();
+            if(waveManager != null)
+                waveManager.SetGameOver();
+
+            Destroy(gameObject);
+            return;
+        }
 
         // Check for tower directly ahead
-        Collider[] hits = Physics.OverlapSphere(transform.position, detectionRange);
+        Collider[] hits = Physics.OverlapSphere(transform.position, 0.6f);
         foreach (Collider hit in hits){
            TowerHealth tower = hit.GetComponent<TowerHealth>();
            if (tower != null)
@@ -73,9 +82,9 @@ public class EnemyController : MonoBehaviour
         }
 
         attackTimer += Time.deltaTime;
-        if (attackTimer >=1f / attackRate)
+        if (attackTimer >=1f / enemyData.attackRate)
         {
-            targetTower.TakeDamage(attackDamage);
+            targetTower.TakeDamage(enemyData.attackDamage);
             attackTimer=0f;
         }
     }
@@ -84,5 +93,11 @@ public class EnemyController : MonoBehaviour
     {
         currentState = enemyState.Dead;
         Destroy(gameObject);
+    }
+
+    public void Initialise(EnemyData data)
+    {
+        enemyData = data;
+        GetComponent<EnemyHealth>().Initialise(data.maxHealth);
     }
 }
