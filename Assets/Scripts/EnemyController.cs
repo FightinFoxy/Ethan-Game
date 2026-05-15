@@ -6,6 +6,8 @@ public class EnemyController : MonoBehaviour
 
     // Base values can be edited in Unity Editor
     [SerializeField] private EnemyData enemyData;
+    [SerializeField] private float bobSpeed = 3;
+    [SerializeField] private float bobHeight = 0.1f;
 
     // States
     private enum enemyState { Walking, Attacking, Dead }
@@ -14,6 +16,7 @@ public class EnemyController : MonoBehaviour
     // References
     private TowerHealth targetTower;
     private float attackTimer = 0f;
+    private float bobTimer = 0f;
 
     // Update is called once per frame
     void Update()
@@ -38,6 +41,8 @@ public class EnemyController : MonoBehaviour
     {
         // Move in negative X direction, right to left
         transform.Translate(Vector3.left * enemyData.moveSpeed * Time.deltaTime);
+        bobTimer += Time.deltaTime;
+        transform.position = new Vector3(transform.position.x, 0.4f + Mathf.Sin(bobTimer * bobSpeed) * bobHeight, transform.position.z);
 
         if (transform.position.x < -0.5f)
         {
