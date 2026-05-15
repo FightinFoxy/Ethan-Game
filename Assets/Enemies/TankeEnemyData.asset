@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d340d7de49250408b2a5d595c62df2, type: 3}
   m_Name: TankeEnemyData
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: 
-  prefab: {fileID: 0}
-  pointCost: 0
-  moveSpeed: 0
-  maxHealth: 0
-  attackDamage: 0
-  attackRate: 0
+  enemyName: Tank
+  prefab: {fileID: 5909713529297460806, guid: 0f693ab984c65e948bdfb6cf52c78c05, type: 3}
+  pointCost: 3
+  moveSpeed: 0.4
+  maxHealth: 200
+  attackDamage: 20
+  attackRate: 0.8
+  minimumWave: 2
+  spawnWeight: 2

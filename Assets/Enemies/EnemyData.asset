@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d340d7de49250408b2a5d595c62df2, type: 3}
   m_Name: EnemyData
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: 
-  prefab: {fileID: 0}
-  pointCost: 0
-  moveSpeed: 0
-  maxHealth: 0
-  attackDamage: 0
-  attackRate: 0
+  enemyName: Basic
+  prefab: {fileID: 6944803845591131967, guid: 082d63008a44ca641b1f702ac9e7bcce, type: 3}
+  pointCost: 1
+  moveSpeed: 0.8
+  maxHealth: 60
+  attackDamage: 10
+  attackRate: 1
+  minimumWave: 1
+  spawnWeight: 10
