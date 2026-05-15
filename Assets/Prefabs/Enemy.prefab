@@ -126,10 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 059ec30b8c108a646bc34ad2149e9d96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  movespeed: 1.5
-  attackDamage: 10
-  attackRate: 2
-  detectionRange: 0.6
+  enemyData: {fileID: 0}
 --- !u!114 &-7969354055746906239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,3 +140,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 100
+  deathSound: {fileID: 8300000, guid: a58e438b7cfa445498120af0e6169082, type: 3}

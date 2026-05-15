@@ -128,3 +128,4 @@ MonoBehaviour:
   currencyValue: 25
   fallSpeed: 2
   lifetime: 10
+  spawnSound: {fileID: 8300000, guid: b1b9c1f0ea1fcae439ed1a4d44ff05fd, type: 3}

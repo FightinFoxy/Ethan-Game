@@ -6,6 +6,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private float maxHealth = 100f;
     private float currentHealth;
     public event Action OnDeath;
+    [SerializeField] private AudioClip deathSound;
     
     void Start()
     {
@@ -28,6 +29,8 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
+        AudioManager.Instance.PlaySound(deathSound);
+
         OnDeath?.Invoke();
         EnemyController controller = GetComponent<EnemyController>();
         if (controller != null)

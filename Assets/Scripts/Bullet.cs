@@ -5,10 +5,16 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float speed = 8f;
     [SerializeField] private float lifetime = 5f;
     [SerializeField] private float damage = 20f;
+    [SerializeField] private AudioClip shootSound;
+
 
     private float lifetimeTimer = 0f;
     
-    // Update is called once per frame
+    void start(){
+        // Play audio when shot created
+        AudioManager.Instance.PlaySound(shootSound);
+    }
+
     void Update()
     {
         transform.Translate(Vector3.right * speed * Time.deltaTime);

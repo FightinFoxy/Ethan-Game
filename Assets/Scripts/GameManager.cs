@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject mainMenuButton;
 
     private bool gameEnded = false;
     private bool isPaused = false;
@@ -26,6 +27,8 @@ public class GameManager : MonoBehaviour
     {
         gameOverPanel.SetActive(false);
         winPanel.SetActive(false);
+        pausePanel.SetActive(false);
+        mainMenuButton.SetActive(false);
     }
 
     public void TriggerGameOver()
@@ -34,6 +37,7 @@ public class GameManager : MonoBehaviour
         gameEnded = true;
 
         gameOverPanel.SetActive(true);
+        mainMenuButton.SetActive(true);
         Time.timeScale = 0f;
     }
 
@@ -42,13 +46,16 @@ public class GameManager : MonoBehaviour
         if (gameEnded) return;
         gameEnded = true;
 
+        mainMenuButton.SetActive(true);
         winPanel.SetActive(true);
         Time.timeScale = 0f;
     }
       public void TogglePause()
     {
+        if(gameEnded) return;
         isPaused = !isPaused;
         Time.timeScale = isPaused ? 0f : 1f;
+        mainMenuButton.SetActive(true);
         pausePanel.SetActive(isPaused);
     }
 
@@ -62,6 +69,13 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+        public void ReturnToMainMenu()
+    {
+        Debug.Log("ReturnToMainMenu called");
+        Time.timeScale = 1f; //Reset gameplay timer
+        SceneManager.LoadScene("MainMenu");
     }
 
     

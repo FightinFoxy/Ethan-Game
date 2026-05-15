@@ -8,7 +8,12 @@ public class CurrencyDrop : MonoBehaviour
 
     private float lifetimeTimer = 0f;
     private bool collected = false;
+    [SerializeField] private AudioClip spawnSound;
 
+    void Start()
+    {
+       AudioManager.Instance.PlaySound(spawnSound);
+    }
     void Update()
     {
         // Fall down until surface

@@ -129,6 +129,7 @@ MonoBehaviour:
   speed: 8
   lifetime: 5
   damage: 20
+  shootSound: {fileID: 8300000, guid: af66162561d2eed40ad49268cab318bb, type: 3}
 --- !u!54 &8872896080500074179
 Rigidbody:
   m_ObjectHideFlags: 0
